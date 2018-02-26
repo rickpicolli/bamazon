@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 
 startingApp();
-
+console.log("\n");
 console.log("`7MM￣￣Yp,                                                                ");
 console.log("  MM    Yb                                                                ");
 console.log("  MM    dP  ,6 Yb.  `7MMpMMMb.pMMMb.   ,6 Yb.  M￣￣MMV ,pW Wq.`7MMpMMMb.  ");
@@ -19,6 +19,7 @@ console.log(" MM￣￣bg. 8)   MM    MM    MM    MM  8)   MM  '  AMV 6W'   `Wb M
 console.log("  MM     Y  ,pm9MM    MM    MM    MM   ,pm9MM    AMV  8M     M8 MM    MM  ");
 console.log("  MM    ,9 8M   MM    MM    MM    MM  8M   MM   AMV  ,YA.   ,A9 MM    MM  ");
 console.log(".JMMmmmd9  `Moo9^Yo..JMML  JMML  JMML.`Moo9^Yo.AMMmmmM `Ybmd9'.JMML  JMML.");
+console.log("\n");
 
 function startingApp() {       
 
@@ -75,21 +76,9 @@ function itemPurchase(response) {
 				if (quantity <= response[0].stock_quantity) {
 					console.log("Placing order...");
 
-                    var record = response.find(function(obj) {
-                    return obj.item_id == answer.item_id; 
-                });
+                var updateQuery = 'UPDATE products SET stock_quantity = ' + (response[0].stock_quantity - quantity) + ' WHERE item_id = ' + item;
 
-		            newQuantity = record.stock_quantity - answer.quantity;
-
-					var updateQuery = connection.query(
-                        "UPDATE products SET ? WHERE ?", [{
-                            stock_quantity: newQuantity
-                    },
-                    {
-                        item_id: record.item_id
-                    }
-                ],
-                    function(err, response) {                    
+                    connection.query(updateQuery, function(err, response) {                    
         
     					if (err) throw err;
 
@@ -104,11 +93,9 @@ function itemPurchase(response) {
 					console.log('Please try again');
                     console.log("\n---------------------------------------------------------------------\n");
                     displayInventory();
-                    // itemPurchase();
-
+                
 				
 				}
-			// }
 		})
 	});
 }
@@ -119,7 +106,6 @@ function displayedTable(response) {
     var table = new Table({
         head: ["Item ID#", "Product", "Department", "Price", "In Stock"],
         colAligns: ['center'],
-        // style: { 'padding-left': 1, 'padding-right': 1 }
     });
 
     for (var i = 0; i < response.length; i++) {
@@ -128,7 +114,7 @@ function displayedTable(response) {
      });
         table.push(arr);
     }
-    // list out all the products
+    // showing table
     console.log(table.toString());
     itemPurchase(response);
 }
