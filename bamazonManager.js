@@ -64,6 +64,9 @@ function displayedTable(response) {
         colAligns: ['center'],
     });
 
+    connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function(err, response) {
+        if (err) throw err;
+
     for (var i = 0; i < response.length; i++) {
         var arr = Object.keys(response[i]).map(function(key) {
         return response[i][key];
@@ -72,6 +75,8 @@ function displayedTable(response) {
     }
     // showing table
     console.log(table.toString());
+    actionAgain();
+     });
 }
 
 function displayLowInventory() {
@@ -112,7 +117,7 @@ function addInventory() {
                  exit();
                  connection.end(); 
              } 
-             else if ((value >= 1) && (value <=9)) {
+             else if ((value >= 1) && (value <=10)) {
                 return true;
               
              
@@ -144,24 +149,20 @@ function addInventory() {
 		connection.query(query, {item_id: item}, function(err, response) {
 			if (err) throw err;
 
-			// If the user has selected an invalid item ID, data attay will be empty
-			// console.log('data = ' + JSON.stringify(data));
-
 				console.log('Updating Inventory...');
 
-				// Construct the updating query string
-				var updateQuery = 'UPDATE products SET stock_quantity = ' + (response[0].stock_quantity + quantity) + ' WHERE item_id = ' + item;
+				// Construct the updating query
+				var updateQuery = 'UPDATE products SET stock_quantity = ' + parseInt(response[0].stock_quantity) + parseInt(quantity) + ' WHERE item_id = ' + item;
 			
+
+				console.log('Stock count for Item ID ' + item + ' was updated to ' + (response[0].stock_quantity + quantity) + '.');
+					console.log("\n---------------------------------------------------------------------\n");
 
 				// Update the inventory
 				connection.query(updateQuery, function(err, response) {
 
 					if (err) throw err;
 
-					console.log('Stock count for Item ID ' + item + ' was updated to ' + (response[0].stock_quantity + quantity) + '.');
-					console.log("\n---------------------------------------------------------------------\n");
-
-					// End the database connection
 					actionAgain();
 				})
 			})

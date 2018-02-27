@@ -40,7 +40,7 @@ function itemPurchase(response) {
                  exit();
                  connection.end(); 
              } 
-             else if ((value >= 1) && (value <=9)) {
+             else if ((value >= 1) && (value <=10)) {
                 return true;
               
              
@@ -66,8 +66,8 @@ function itemPurchase(response) {
 
         var item = answer.item_id;
         var quantity = answer.quantity;
-        var query = "SELECT * FROM products WHERE item_id = ?";
-        var totalPrice = response[0].price * quantity;
+        var query = "SELECT * FROM products WHERE ?";
+        var totalPrice;
 
 
         connection.query(query, {item_id: item}, function(err, response) {
@@ -78,12 +78,11 @@ function itemPurchase(response) {
 
                 var updateQuery = 'UPDATE products SET stock_quantity = ' + (response[0].stock_quantity - quantity) + ' WHERE item_id = ' + item;
 
-                    connection.query(updateQuery, function(err, response) {                    
+                    connection.query(updateQuery, function(err, res) {                    
         
     					if (err) throw err;
-
+                        totalPrice = response[0]["price"] * quantity;
     					console.log('Your order was placed! Your total is $' + totalPrice);
-                        console.log(response.affectedRows + " products updated!\n");
 
     					buyAgain();                        
 
@@ -92,7 +91,7 @@ function itemPurchase(response) {
 					console.log("There is not enough product in stock of the product that you choose and your order can not be placed.");
 					console.log('Please try again');
                     console.log("\n---------------------------------------------------------------------\n");
-                    displayInventory();
+                    startingApp();
                 
 				
 				}

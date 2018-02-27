@@ -17,8 +17,9 @@ VALUES ("Jigsaw Puzzle", "games", 30.50, 300),
 ("Nintendo Switch", "games", 250.00, 274),
 ("Javascript and JQuery", "book", 23.10, 250),
 ("Nike Shorts", "Clothing", 18.35, 273),
+("Calvin Klein Men's T-Shirt", "Clothing", 14.50, 350),
 ("Men's Titanium Watch", "Accessories", 200.00, 157),
-("Armani Sunglasses", "Accessories", 50.00, 374),
+("Armani Sunglasses", "Accessories", 50.00, 34),
 ("Royal Canin Cat Food", "Pet", 38.99, 490),
 ("Royal Canin Dog Food", "Pet", 32.99, 490),
-("Dog's Chew Toy", "Pet", 11.99, 340);
+("Dog's Chew Toy", "Pet", 11.99, 40);
