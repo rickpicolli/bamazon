@@ -51,7 +51,7 @@ function managerActions() {
 			addInventory();
 		}
 		else {
-			songSearch();
+			addNewProduct();
 		}
 	})
 }
