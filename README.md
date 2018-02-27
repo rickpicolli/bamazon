@@ -14,15 +14,25 @@ There are two JavaScript files replicate the basics of a simple ecommerce engine
 
 - `BamazonManager.js`
   - Mimics the basics of a warehouse management system, providing managers with a list of options to view stock and adjust inventory.
+  
   ![Alt text](/assets/screenshot2.png?raw=true)
+  
   - A sample of the menu is below:
+  
     * View Products for Sale (show the table listing every available item: the item IDs, names, prices, and quantities).
+    
     ![Alt text](/assets/screenshot3.png?raw=true)
+    
     * View Low Inventory (list all items with an inventory count lower than fifty).
+    
     ![Alt text](/assets/screenshot4.png?raw=true)
+    
     * Add to Inventory (display a prompt that will let the manager "add more" of any item currently in the store).
+    
     ![Alt text](/assets/screenshot5.png?raw=true)
+    
     * Add New Product (allow the manager to add a completely new product to the store).    
+    
     ![Alt text](/assets/screenshot6.png?raw=true)
     
     
